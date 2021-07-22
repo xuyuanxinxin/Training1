@@ -1,0 +1,43 @@
+<h3 mat-dialog-title>
+  {{ data.action == "add" ? "学生情報追加" : "学生情報変更" }}
+</h3>
+
+<mat-form-field appearance="fill" class="inputWidth">
+  <mat-label>No.</mat-label>
+  <input matInput [formControl]="numberControl" required />
+  <mat-error *ngIf="numberControl.invalid">{{
+    numberGetErrorMessage()
+  }}</mat-error>
+</mat-form-field>
+
+<mat-form-field appearance="fill" class="inputWidth">
+  <mat-label>姓名</mat-label>
+  <input matInput [formControl]="nameControl" required />
+  <mat-error *ngIf="nameControl.invalid">{{ getErrorMessage() }}</mat-error>
+</mat-form-field>
+<mat-form-field appearance="fill" class="inputWidth">
+  <mat-label>性别</mat-label>
+  <mat-select [(value)]="selected">
+    <mat-option value="0">男</mat-option>
+    <mat-option value="1">女</mat-option>
+  </mat-select>
+</mat-form-field>
+<mat-form-field appearance="fill" class="inputWidth">
+  <mat-label>住所</mat-label>
+  <textarea matInput [formControl]="liveControl"></textarea>
+</mat-form-field>
+<div mat-dialog-actions class="inputWidth">
+  <button mat-dialog-close mat-raised-button color="primary">キャンセル</button>
+  <button
+    mat-raised-button
+    color="accent"
+    (click)="openConfirm()"
+    cdkFocusInitial
+    [disabled]="!numberControl.valid || !nameControl.valid"
+  >
+    登録
+  </button>
+</div>
+<!-- <mat-dialog-content class="mat-typography">
+  <h1>this is a dialog</h1>
+</mat-dialog-content> -->

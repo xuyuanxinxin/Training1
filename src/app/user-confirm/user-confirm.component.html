@@ -1,0 +1,18 @@
+<p class="title">確認メッセージ：</p>
+<mat-divider></mat-divider>
+<p class="center">{{ keyword }}します。よろしいで すか？</p>
+
+<div mat-dialog-actions class="inputWidth">
+  <button mat-raised-button color="primary" mat-dialog-close (click)="cancel()">
+    キャンセル
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [mat-dialog-close]="close"
+    (click)="confirm()"
+    cdkFocusInitial
+  >
+    {{ keyword }}
+  </button>
+</div>
