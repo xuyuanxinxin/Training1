@@ -38,6 +38,8 @@ export class UserDataService {
   }
 
   updateUser(user: User) {
+    console.log("update user:"+user.Gender);
+    
     this.myDataArray = this.myDataArray.map((item) => {
       if (item.Number == user.Number) {
         return user;

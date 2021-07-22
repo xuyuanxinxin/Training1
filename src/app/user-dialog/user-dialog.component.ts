@@ -21,7 +21,6 @@ export class UserDialogComponent implements OnInit {
   ) {}
 
   close: boolean = true;
-  test: string = 'Test Contetn';
   numberControl: FormControl = new FormControl('', [
     Validators.required,
     ConflictingNumberValidator(this.userService.getUsers(), this.data),
@@ -59,7 +58,7 @@ export class UserDialogComponent implements OnInit {
     let user: User = {
       Number: Number.parseInt(this.numberControl.value),
       Name: this.nameControl.value,
-      Gender: this.selected ? Gender.Male : Gender.FeMale,
+      Gender: this.selected == Gender.Male.toString() ? Gender.Male : Gender.FeMale,
       LiveAddress: this.liveControl.value,
     };
 
