@@ -19,10 +19,12 @@ tr:hover {
   margin-top: 15px;
 }
 .columnCenter {
-  text-align: center;
-  cursor: pointer;
-}
-datatable-header-cell {
-  display: flex !important;
+  // display: flex;
+  // justify-content: center;
+  width: 100%;
+  height: 40px;
+  display: flex;
   justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }

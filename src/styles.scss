@@ -19,11 +19,10 @@ app-root {
   flex-direction: column;
 }
 
-datatable-body-cell {
-  padding: 0px !important;
-}
-
 datatable-header-cell {
   display: flex !important;
   justify-content: center;
+}
+datatable-body-cell {
+  padding: 0px !important;
 }
