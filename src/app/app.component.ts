@@ -17,7 +17,6 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
 export class AppComponent {
   title = 'Training1';
   flag = false;
-  // timeInetrval: any;
   timeStart: number;
   pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['number', 'name', 'gender', 'address'];
@@ -25,8 +24,6 @@ export class AppComponent {
   datas: Observable<User[]>;
   force = ColumnMode.force;
   rowselected = [];
-
-  // columns = [{ prop: 'Number' }, { name: 'Gender' }, { name: 'Name' }];
 
   @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;

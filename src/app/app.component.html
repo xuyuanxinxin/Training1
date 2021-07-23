@@ -58,8 +58,9 @@
     [selected]="rowselected"
     rowHeight="auto"
     [columnMode]="force"
+    [sorts]="[{ prop: 'Number', dir: 'desc' }]"
   >
-    <ngx-datatable-column prop="Number">
+    <ngx-datatable-column prop="Number" name="No">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         <div
           style="width: 100%; height: 40px"
@@ -72,7 +73,7 @@
         </div>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column prop="Name">
+    <ngx-datatable-column prop="Name" name="名称">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         <div
           (mousedown)="onMouseDown($event)"
@@ -84,7 +85,7 @@
         </div>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column prop="Gender">
+    <ngx-datatable-column prop="Gender" name="性别">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         <div
           (mousedown)="onMouseDown($event)"
@@ -96,7 +97,7 @@
         </div>
       </ng-template>
     </ngx-datatable-column>
-    <ngx-datatable-column prop="Address">
+    <ngx-datatable-column prop="Address" name="住址">
       <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
         <div
           (mousedown)="onMouseDown($event)"
