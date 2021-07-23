@@ -9,32 +9,41 @@ import { UserDataService } from '../service/user-data.service';
   styleUrls: ['./user-confirm.component.scss'],
 })
 export class UserConfirmComponent implements OnInit {
+  close: boolean;
+  keyword: string;
+
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { user: User; action: any },
     private userService: UserDataService,
     private dialog: MatDialog
   ) {}
-  close: boolean = false;
-  keyword: string = '登録';
 
   ngOnInit(): void {
-    if (this.data.action == 'change') {
+    this.close = false;
+    this.keyword = '登録';
+    if (this.data.action === 'change') {
       this.keyword = '登録';
-    } else if (this.data.action == 'delete') {
+    } else if (this.data.action === 'delete') {
       this.keyword = '削除';
     }
   }
 
-  confirm() {
-    switch(this.data.action){
-      case 'change':this.userService.updateUser(this.data.user);break;
-      case 'delete':this.userService.deleteUser(this.data.user);break;
-      case 'add':this.userService.addUser(this.data.user);break;
+  save() {
+    switch (this.data.action) {
+      case 'change':
+        this.userService.updateUser(this.data.user);
+        break;
+      case 'delete':
+        this.userService.deleteUser(this.data.user);
+        break;
+      case 'add':
+        this.userService.addUser(this.data.user);
+        break;
     }
-    this.close = true;
     this.dialog.closeAll();
   }
-  cancel() {
+
+  closeDialog() {
     this.close = true;
   }
 }

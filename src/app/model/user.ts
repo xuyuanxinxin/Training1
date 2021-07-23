@@ -4,5 +4,5 @@ export interface User {
   Number: number;
   Name: string;
   Gender: Gender;
-  LiveAddress: string;
+  Address: string;
 }

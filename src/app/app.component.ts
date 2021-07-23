@@ -1,43 +1,48 @@
-import {
-  AfterViewInit,
-  Component,
-  ViewChild,
-} from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { UserDataService } from './service/user-data.service';
 import { User } from './model/user';
-import { Observable } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { UserConfirmComponent } from './user-confirm/user-confirm.component';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { Gender } from './model/gender';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent implements AfterViewInit {
-  constructor(public dialog: MatDialog, private userService: UserDataService) {
-    this.userService
-      .getUsers()
-      .subscribe((data) => (this.dataSource = new MatTableDataSource(data)));
-  }
-
+export class AppComponent {
   title = 'Training1';
   flag = false;
-  timeInetrval: any;
-  timeStart: any;
-  pageSizeOptions: number[] = [2, 10, 25, 100];
+  // timeInetrval: any;
+  timeStart: number;
+  pageSizeOptions: number[] = [5, 10, 25, 100];
   displayedColumns: string[] = ['number', 'name', 'gender', 'address'];
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
-  // dataSource: Observable<User[]> = this.userService.getUsers();
+  datas: Observable<User[]>;
+  force = ColumnMode.force;
+  rowselected = [];
 
-  @ViewChild(MatPaginator, { static: true }) paginator: MatPaginator;
+  // columns = [{ prop: 'Number' }, { name: 'Gender' }, { name: 'Name' }];
 
-  ngAfterViewInit(): void {
+  @ViewChild(MatPaginator, { static: true })
+  paginator: MatPaginator;
+
+  constructor(public dialog: MatDialog, private userService: UserDataService) {
+    this.datas = this.userService.getUsers();
+    this.userService.getUsers().subscribe((data) => {
+      this.dataSource = new MatTableDataSource(data);
+    });
+  }
+
+  ngInit(): void {
     this.dataSource.paginator = this.paginator;
   }
-  openDialog(action: string, rowData: any) {
+
+  openDialog(action: string, rowData?: any) {
     if (!this.flag) {
       this.dialog
         .open(UserDialogComponent, {
@@ -46,54 +51,54 @@ export class AppComponent implements AfterViewInit {
         })
         .afterClosed()
         .subscribe(() => {
-          this.userService
-            .getUsers()
-            .subscribe(
-              (data) => (this.dataSource = new MatTableDataSource(data))
-            );
+          this.userService.getUsers().subscribe((data) => {
+            this.dataSource = new MatTableDataSource(data);
+            this.datas = this.userService.getUsers();
+          });
           this.dataSource.paginator = this.paginator;
         });
     }
   }
 
-  onMouseDown(event: MouseEvent, row: any) {
+  onMouseDown(event: Event) {
+    console.log('mouse down');
+    console.log(event);
+
     this.timeStart = this.getNow();
-    console.log('row::' + row.Number);
-    console.log('row::' + row.Name);
-
-    this.timeInetrval = setInterval(() => {
-      if (this.getNow() - this.timeStart > 1000) {
-        console.log('触发长按');
-        console.log('target: ' + event.target);
-
-        this.dialog
-          .open(UserConfirmComponent, {
-            data: { action: 'delete', user: row },
-            disableClose: true,
-          })
-          .afterClosed()
-          .subscribe(() => {
-            this.userService
-              .getUsers()
-              .subscribe(
-                (data) => (this.dataSource = new MatTableDataSource(data))
-              );
-            this.dataSource.paginator = this.paginator;
-            this.flag = false;
-          });
-        clearInterval(this.timeInetrval);
-      }
-      this.flag = true;
-    }, 100);
-    console.log('mouse down:' + event.type);
   }
 
-  onMouseUp(event: MouseEvent) {
-    clearInterval(this.timeInetrval);
+  onMouseUp(row: any) {
+    console.log(row);
+
+    console.log('mouse up');
+    if (this.getNow() - this.timeStart > 500) {
+      this.dialog
+        .open(UserConfirmComponent, {
+          data: { action: 'delete', user: row },
+          disableClose: true,
+        })
+        .afterClosed()
+        .subscribe(() => {
+          this.userService.getUsers().subscribe((data) => {
+            this.dataSource = new MatTableDataSource(data);
+            this.datas = this.userService.getUsers();
+          });
+          this.dataSource.paginator = this.paginator;
+          this.datas = this.userService.getUsers();
+          this.flag = false;
+        });
+      this.datas = this.userService.getUsers();
+      this.flag = true;
+      console.log('mouse up actived');
+    }
   }
 
   getNow() {
     let now = new Date();
     return now.getTime();
+  }
+
+  genderTransform(gender: Gender): string {
+    return gender === 0 ? '男' : '女';
   }
 }

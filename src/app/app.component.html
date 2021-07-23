@@ -3,7 +3,7 @@
     mat-raised-button
     color="primary"
     class="addBtn"
-    (click)="openDialog('add', '')"
+    (click)="openDialog('add')"
   >
     追加
   </button>
@@ -23,21 +23,21 @@
     <ng-container matColumnDef="gender">
       <th mat-header-cell *matHeaderCellDef>性别</th>
       <td mat-cell *matCellDef="let element">
-        {{ element.Gender == 0 ? "男" : "女" }}
+        {{ genderTransform(element.Gender) }}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="address">
       <th mat-header-cell *matHeaderCellDef>住所</th>
-      <td mat-cell *matCellDef="let element">{{ element.LiveAddress }}</td>
+      <td mat-cell *matCellDef="let element">{{ element.Address }}</td>
     </ng-container>
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr
       mat-row
       *matRowDef="let row; columns: displayedColumns"
       (click)="openDialog('change', row)"
-      (mousedown)="onMouseDown($event, row)"
-      (mouseup)="onMouseUp($event)"
+      (mousedown)="onMouseDown($event)"
+      (mouseup)="onMouseUp(row)"
     ></tr>
   </table>
   <mat-paginator
@@ -46,4 +46,67 @@
     showFirstLastButtons
     itemsPerPageLabel="每页行数"
   ></mat-paginator>
+</div>
+<div class="container mt">
+  <!-- [columns]="columns" -->
+  <ngx-datatable
+    [rows]="datas | async"
+    class="material"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [limit]="3"
+    [selected]="rowselected"
+    rowHeight="auto"
+    [columnMode]="force"
+  >
+    <ngx-datatable-column prop="Number">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          style="width: 100%; height: 40px"
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="Name">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="Gender">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ genderTransform(value) }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <ngx-datatable-column prop="Address">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+  </ngx-datatable>
 </div>

@@ -20,7 +20,6 @@ export class UserDialogComponent implements OnInit {
     private userService: UserDataService
   ) {}
 
-  close: boolean = true;
   numberControl: FormControl = new FormControl('', [
     Validators.required,
     ConflictingNumberValidator(this.userService.getUsers(), this.data),
@@ -28,15 +27,16 @@ export class UserDialogComponent implements OnInit {
   nameControl = new FormControl('', [Validators.required]);
   liveControl = new FormControl('');
   selected: string = '';
+  dialogTitle: string;
 
   ngOnInit(): void {
-    console.log('data:' + this.data.action);
-
+    this.dialogTitle =
+      this.data.action === 'add' ? '学生情報追加' : '学生情報変更';
     if (this.data.action == 'change') {
       this.numberControl.setValue(this.data.row.Number);
       this.nameControl.setValue(this.data.row.Name);
       this.selected = this.data.row.Gender.toString();
-      this.liveControl.setValue(this.data.row.LiveAddress);
+      this.liveControl.setValue(this.data.row.Address);
     }
   }
 
@@ -50,23 +50,24 @@ export class UserDialogComponent implements OnInit {
   numberGetErrorMessage() {
     if (this.numberControl.hasError('required')) {
       return '不能为空，需输入对应值';
-    } else if (this.numberControl.hasError('name'))
-      return this.numberControl.getError('name');
+    } else {
+      if (this.numberControl.hasError('name')) {
+        return this.numberControl.getError('name');
+      }
+    }
   }
 
   openConfirm() {
     let user: User = {
       Number: Number.parseInt(this.numberControl.value),
       Name: this.nameControl.value,
-      Gender: this.selected == Gender.Male.toString() ? Gender.Male : Gender.FeMale,
-      LiveAddress: this.liveControl.value,
+      Gender: +this.selected === Gender.Male ? Gender.Male : Gender.FeMale,
+      Address: this.liveControl.value,
     };
 
-    this.dialog
-      .open(UserConfirmComponent, {
-        data: { user: user, action: this.data.action },
-        disableClose: true,
-        id: 'confirm',
-      })
+    this.dialog.open(UserConfirmComponent, {
+      data: { user: user, action: this.data.action },
+      disableClose: true,
+    });
   }
 }

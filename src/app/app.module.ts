@@ -13,15 +13,17 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UserConfirmComponent } from './user-confirm/user-confirm.component';
 import { HttpClientModule } from '@angular/common/http';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import {MatDividerModule} from "@angular/material/divider"
+import {
+  MatPaginatorIntl,
+  MatPaginatorModule,
+} from '@angular/material/paginator';
+import { MatDividerModule } from '@angular/material/divider';
+import { CustomPaginator } from './custom-paginator';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { ColumnMode } from '@swimlane/ngx-datatable';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    UserDialogComponent,
-    UserConfirmComponent,
-  ],
+  declarations: [AppComponent, UserDialogComponent, UserConfirmComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -34,9 +36,15 @@ import {MatDividerModule} from "@angular/material/divider"
     ReactiveFormsModule,
     HttpClientModule,
     MatPaginatorModule,
-    MatDividerModule
+    MatDividerModule,
+    NgxDatatableModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: MatPaginatorIntl,
+      useClass: CustomPaginator,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
