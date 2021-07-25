@@ -11,9 +11,10 @@ export function ConflictingNumberValidator(
     if (data.action == 'change') {
       usersObserval.subscribe((users) => {
         length = users.filter((user) => {
-          if (user.Number != data.row.Number && user.Number == control.value)
+          if (user.Number != data.row.Number && user.Number == control.value){
             return user;
-          return '';
+          }
+          return null; 
         }).length;
       });
     } else {

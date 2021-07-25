@@ -23,7 +23,6 @@ export class AppComponent {
   dataSource: MatTableDataSource<User> = new MatTableDataSource();
   datas: Observable<User[]>;
   force = ColumnMode.force;
-  rowselected = [];
 
   @ViewChild(MatPaginator, { static: true })
   paginator: MatPaginator;

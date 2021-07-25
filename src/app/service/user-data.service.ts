@@ -49,16 +49,16 @@ export class UserDataService {
   constructor() {}
 
   getUsers(): Observable<User[]> {
+    this.myDataArray = [...this.myDataArray];
     return of(this.myDataArray);
   }
 
   addUser(user: User) {
     this.myDataArray.push(user);
-    this.myDataArray = [...this.myDataArray];
   }
 
   updateUser(user: User) {
-    console.log('update user:' + user.Gender);
+    console.log('update user:' + user.Gender + ' ' + user.Address);
     this.myDataArray = this.myDataArray.map((item) => {
       if (item.Number == user.Number) {
         return user;
@@ -66,7 +66,6 @@ export class UserDataService {
         return item;
       }
     });
-    this.myDataArray = [...this.myDataArray];
   }
 
   deleteUser(user: User) {
@@ -78,6 +77,5 @@ export class UserDataService {
         this.myDataArray.splice(this.myDataArray.indexOf(item), 1);
       }
     });
-    this.myDataArray = [...this.myDataArray];
   }
 }
