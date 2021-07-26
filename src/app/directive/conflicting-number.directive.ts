@@ -7,22 +7,31 @@ export function ConflictingNumberValidator(
   data: any
 ): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
-    let length: number = 0;
+    //符合条件的用户列表的长度
+    let userArrayLength: number = 0;
+
+    //当操作类型为change时检查
+    //用户不能重复但可以和原来编号相同
     if (data.action == 'change') {
       usersObserval.subscribe((users) => {
-        length = users.filter((user) => {
-          if (user.Number != data.row.Number && user.Number == control.value){
+        userArrayLength = users.filter((user) => {
+          if (user.Number != data.row.Number && user.Number == control.value) {
             return user;
           }
-          return null; 
+          return null;
         }).length;
       });
     } else {
+      //其他类型操作则不可重复
       usersObserval.subscribe((users) => {
-        length = users.filter((user) => user.Number == control.value).length;
+        userArrayLength = users.filter(
+          (user) => user.Number == control.value
+        ).length;
       });
     }
-    if (length == 0) {
+    //符合条件列表为空则没有报错
+    //否则则有错误信息返回
+    if (userArrayLength == 0) {
       return null;
     } else {
       return { name: '重复的No.' };

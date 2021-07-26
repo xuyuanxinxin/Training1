@@ -12,15 +12,10 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatInputModule } from '@angular/material/input';
 import { UserConfirmComponent } from './user-confirm/user-confirm.component';
-import { HttpClientModule } from '@angular/common/http';
-import {
-  MatPaginatorIntl,
-  MatPaginatorModule,
-} from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDividerModule } from '@angular/material/divider';
-import { CustomPaginator } from './custom-paginator';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-import { ColumnMode } from '@swimlane/ngx-datatable';
+import { MatSortModule } from '@angular/material/sort';
 
 @NgModule({
   declarations: [AppComponent, UserDialogComponent, UserConfirmComponent],
@@ -34,17 +29,12 @@ import { ColumnMode } from '@swimlane/ngx-datatable';
     MatSelectModule,
     MatInputModule,
     ReactiveFormsModule,
-    HttpClientModule,
     MatPaginatorModule,
     MatDividerModule,
     NgxDatatableModule,
+    MatSortModule,
   ],
-  providers: [
-    {
-      provide: MatPaginatorIntl,
-      useClass: CustomPaginator,
-    },
-  ],
+  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

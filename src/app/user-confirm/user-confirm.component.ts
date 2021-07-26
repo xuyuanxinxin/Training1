@@ -9,7 +9,9 @@ import { UserDataService } from '../service/user-data.service';
   styleUrls: ['./user-confirm.component.scss'],
 })
 export class UserConfirmComponent implements OnInit {
-  close: boolean;
+  //控制dialog是否关闭
+  dialogClose: boolean;
+  //操作关键词
   keyword: string;
 
   constructor(
@@ -18,8 +20,9 @@ export class UserConfirmComponent implements OnInit {
     private dialog: MatDialog
   ) {}
 
+  //根据传入的data.action来设置操作关键词
   ngOnInit(): void {
-    this.close = false;
+    this.dialogClose = false;
     this.keyword = '登録';
     if (this.data.action === 'change') {
       this.keyword = '登録';
@@ -28,13 +31,15 @@ export class UserConfirmComponent implements OnInit {
     }
   }
 
+  //根据操作类型执行操作
+  //结束后关闭所有对话框
   save() {
     switch (this.data.action) {
       case 'change':
         this.userService.updateUser(this.data.user);
         break;
       case 'delete':
-        this.userService.deleteUser(this.data.user);
+        this.userService.deleteUser(this.data.user.Number);
         break;
       case 'add':
         this.userService.addUser(this.data.user);
@@ -43,7 +48,8 @@ export class UserConfirmComponent implements OnInit {
     this.dialog.closeAll();
   }
 
+  //关闭当前对话框
   closeDialog() {
-    this.close = true;
+    this.dialogClose = true;
   }
 }

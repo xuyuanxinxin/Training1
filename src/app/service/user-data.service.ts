@@ -7,7 +7,9 @@ import { Observable, of } from 'rxjs';
   providedIn: 'root',
 })
 export class UserDataService {
-  myDataArray: User[] = [
+  constructor() {}
+
+  userArray: User[] = [
     {
       Number: 1001,
       Name: '张三',
@@ -46,20 +48,29 @@ export class UserDataService {
     },
   ];
 
-  constructor() {}
-
+  /**
+   * 获取用户
+   * @returns 用户的数据流
+   */
   getUsers(): Observable<User[]> {
-    this.myDataArray = [...this.myDataArray];
-    return of(this.myDataArray);
+    this.userArray = [...this.userArray];
+    return of(this.userArray);
   }
 
+  /**
+   * 添加用户
+   * @param user 添加的用户对象
+   */
   addUser(user: User) {
-    this.myDataArray.push(user);
+    this.userArray.push(user);
   }
 
+  /**
+   * 更新用户信息
+   * @param user 更新的用户对象
+   */
   updateUser(user: User) {
-    console.log('update user:' + user.Gender + ' ' + user.Address);
-    this.myDataArray = this.myDataArray.map((item) => {
+    this.userArray = this.userArray.map((item) => {
       if (item.Number == user.Number) {
         return user;
       } else {
@@ -68,13 +79,14 @@ export class UserDataService {
     });
   }
 
-  deleteUser(user: User) {
-    console.log(user.Name);
-    console.log(user.Number);
-
-    this.myDataArray.forEach((item) => {
-      if (item.Number == user.Number) {
-        this.myDataArray.splice(this.myDataArray.indexOf(item), 1);
+  /**
+   * 删除用户
+   * @param userNumber 用户编号
+   */
+  deleteUser(userNumber: number) {
+    this.userArray.forEach((item) => {
+      if (item.Number == userNumber) {
+        this.userArray.splice(this.userArray.indexOf(item), 1);
       }
     });
   }

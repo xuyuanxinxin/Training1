@@ -20,33 +20,46 @@ export class UserDialogComponent implements OnInit {
     private userService: UserDataService
   ) {}
 
+  //No.输入控件
+  //自定义验证 Number不可重复
+  //必须输入项
   numberControl: FormControl = new FormControl('', [
     Validators.required,
     ConflictingNumberValidator(this.userService.getUsers(), this.data),
   ]);
+
+  //姓名输入控件
+  //必须输入项
   nameControl = new FormControl('', [Validators.required]);
+  //姓名输入控件
   liveControl = new FormControl('');
-  selected: string = '';
+  //选择的性别
+  genderSelected: string = '';
+  //对话框标题
   dialogTitle: string;
 
+  //根据action操作类型设置对话框标题
+  //执行change操作时将数据填入输入框
   ngOnInit(): void {
     this.dialogTitle =
       this.data.action === 'add' ? '学生情報追加' : '学生情報変更';
     if (this.data.action == 'change') {
       this.numberControl.setValue(this.data.row.Number);
       this.nameControl.setValue(this.data.row.Name);
-      this.selected = this.data.row.Gender.toString();
+      this.genderSelected = this.data.row.Gender.toString();
       this.liveControl.setValue(this.data.row.Address);
     }
   }
 
-  getErrorMessage() {
+  //获取姓名输入框错误提示信息
+  nameGetErrorMessage() {
     if (this.nameControl.hasError('required')) {
       return '不能为空，需输入对应值';
     }
     return '';
   }
 
+  //获取No.输入框错误信息
   numberGetErrorMessage() {
     if (this.numberControl.hasError('required')) {
       return '不能为空，需输入对应值';
@@ -57,11 +70,13 @@ export class UserDialogComponent implements OnInit {
     }
   }
 
+  //打开确认对话框 并传入用户信息
   openConfirm() {
     let user: User = {
       Number: Number.parseInt(this.numberControl.value),
       Name: this.nameControl.value,
-      Gender: +this.selected === Gender.Male ? Gender.Male : Gender.FeMale,
+      Gender:
+        +this.genderSelected === Gender.Male ? Gender.Male : Gender.FeMale,
       Address: this.liveControl.value,
     };
 
