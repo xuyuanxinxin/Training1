@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { select, Store, Action } from '@ngrx/store';
 
 import * as ContentUserstableActions from './content-userstable.actions';
+import { ContentUserstableEntity } from './content-userstable.models';
 import * as ContentUserstableSelectors from './content-userstable.selectors';
 
 @Injectable()
@@ -33,5 +34,9 @@ export class ContentUserstableFacade {
   //分发Action
   dispatch(action: Action) {
     this.store.dispatch(action);
+  }
+
+  addUser(user: ContentUserstableEntity) {
+    this.store.dispatch(ContentUserstableActions.addUser({ user: user }));
   }
 }

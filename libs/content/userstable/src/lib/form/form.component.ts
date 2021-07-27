@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
-import { UserDataService, Gender } from '@training-app/backend';
+import { Gender } from '@training-app/backend';
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { UserConfirmComponent } from '../user-confirm/user-confirm.component';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
@@ -28,6 +28,13 @@ export class FormComponent implements OnInit {
   force = ColumnMode.force;
   //每页数据行数
   pageSize = 3;
+
+  //表格信息设置
+  tableMessage = {
+    emptyMessage: '没有数据显示.',
+    totalMessage: '总数',
+    selectedMessage: '选中',
+  };
 
   constructor(
     public dialog: MatDialog,

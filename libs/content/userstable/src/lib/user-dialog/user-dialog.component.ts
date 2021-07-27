@@ -1,11 +1,7 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import {
-  ConflictingNumberValidator,
-  Gender,
-  UserDataService,
-} from '@training-app/backend';
+import { ConflictingNumberValidator, Gender } from '@training-app/backend';
 import { ContentUserstableFacade } from '../+state/content-userstable.facade';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
 import { UserConfirmComponent } from '../user-confirm/user-confirm.component';
