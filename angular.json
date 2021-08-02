@@ -1,6 +1,56 @@
 {
   "version": 1,
   "projects": {
+    "backend": {
+      "projectType": "library",
+      "root": "libs/backend",
+      "sourceRoot": "libs/backend/src",
+      "prefix": "training-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/backend"],
+          "options": {
+            "jestConfig": "libs/backend/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/backend/src/**/*.ts",
+              "libs/backend/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
+    "content-userstable": {
+      "projectType": "library",
+      "root": "libs/content/userstable",
+      "sourceRoot": "libs/content/userstable/src",
+      "prefix": "training-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/content/userstable"],
+          "options": {
+            "jestConfig": "libs/content/userstable/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/content/userstable/src/**/*.ts",
+              "libs/content/userstable/src/**/*.html"
+            ]
+          }
+        }
+      }
+    },
     "training": {
       "projectType": "application",
       "root": "apps/training",
@@ -21,7 +71,7 @@
               "apps/training/src/favicon.ico",
               "apps/training/src/assets"
             ],
-            "styles": ["apps/training/src/styles.scss"],
+            "styles": ["./node_modules/@angular/material/prebuilt-themes/indigo-pink.css", "apps/training/src/styles.scss"],
             "scripts": []
           },
           "configurations": {

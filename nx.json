@@ -27,6 +27,12 @@
     ]
   },
   "projects": {
+    "backend": {
+      "tags": ["lib:libs/backend"]
+    },
+    "content-userstable": {
+      "tags": ["lib:content"]
+    },
     "training": {
       "tags": []
     },

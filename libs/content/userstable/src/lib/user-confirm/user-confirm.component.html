@@ -1,0 +1,33 @@
+<!-- 对话框标题开始 -->
+<p class="title">確認メッセージ：</p>
+<!-- 对话框标题结束 -->
+
+<!-- 分割线开始 -->
+<mat-divider></mat-divider>
+<!-- 分割线结束 -->
+
+<!-- 对话框内容开始 -->
+<p class="center">{{ keyword }}します。よろしいで すか？</p>
+<!-- 对话框内容结束 -->
+
+<!-- 按钮区域开始 -->
+<div mat-dialog-actions class="inputWidth">
+  <button
+    mat-raised-button
+    color="primary"
+    mat-dialog-close
+    (click)="closeDialog()"
+  >
+    キャンセル
+  </button>
+  <button
+    mat-raised-button
+    color="accent"
+    [mat-dialog-close]="dialogClose"
+    (click)="save()"
+    cdkFocusInitial
+  >
+    {{ keyword }}
+  </button>
+</div>
+<!-- 按钮区域结束 -->

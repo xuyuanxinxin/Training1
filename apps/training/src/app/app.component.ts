@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ContentUserstableFacade } from '@training-app/content/userstable';
 
 @Component({
   selector: 'training-app-root',
@@ -7,4 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'training';
+  constructor(private facade: ContentUserstableFacade) {}
+  ngOnInit() {
+    this.facade.init();
+  }
 }

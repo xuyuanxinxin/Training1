@@ -1,0 +1,13 @@
+@baseUrl = http://localhost:3000
+
+@Content-Type = application/json
+
+POST   {{baseUrl}}/users
+Content-Type:{{Content-Type}}
+
+{
+  "Number": 1007,
+  "Name": "testuser55",
+  "Gender": 0,
+  "Address": "testAddress"
+}

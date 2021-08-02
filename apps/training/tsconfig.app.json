@@ -5,5 +5,9 @@
     "types": []
   },
   "files": ["src/main.ts", "src/polyfills.ts"],
-  "include": ["src/**/*.d.ts"]
+  "include": [
+    "src/**/*.d.ts",
+    "../../libs/content/userstable/src/index.ts",
+    "../../libs/backend/src/index.ts"
+  ]
 }

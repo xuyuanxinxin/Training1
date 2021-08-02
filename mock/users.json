@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "Number": 1001,
+      "Name": "张三",
+      "Gender": 0,
+      "Address": "xxxx"
+    },
+    {
+      "Number": 1002,
+      "Name": "李四",
+      "Gender": 1,
+      "Address": "xxxx"
+    },
+    {
+      "Number": 1003,
+      "Name": "王五",
+      "Gender": 0,
+      "Address": "xxxx"
+    },
+    {
+      "Number": 1004,
+      "Name": "王五2",
+      "Gender": 1,
+      "Address": "xxxx"
+    },
+    {
+      "Number": 1005,
+      "Name": "王五4",
+      "Gender": 0,
+      "Address": "xxxx"
+    }
+  ]
+}

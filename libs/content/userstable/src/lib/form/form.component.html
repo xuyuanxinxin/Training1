@@ -1,0 +1,87 @@
+<!-- 追加按钮开始 -->
+<div class="container mt">
+  <button
+    mat-raised-button
+    color="primary"
+    class="addBtn"
+    (click)="openDialog('add')"
+  >
+    追加
+  </button>
+</div>
+<!-- 追加按钮结束 -->
+
+<!-- 表格开始 -->
+<div class="container mt">
+  <ngx-datatable
+    [rows]="datas | async"
+    class="material"
+    [headerHeight]="50"
+    [footerHeight]="50"
+    [limit]="3"
+    rowHeight="auto"
+    [columnMode]="force"
+    [sorts]="[{ prop: 'Number', dir: 'desc' }]"
+  >
+    <!-- No.列开始 -->
+    <ngx-datatable-column prop="Number" name="No">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- No.列结束 -->
+
+    <!-- 名称列开始 -->
+    <ngx-datatable-column prop="Name" name="名称">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- 名称列结束 -->
+
+    <!-- 性别列开始 -->
+    <ngx-datatable-column prop="Gender" name="性别">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ genderTransform(value) }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- 性别列结束 -->
+
+    <!-- 住址列开始 -->
+    <ngx-datatable-column prop="Address" name="住址">
+      <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+        <div
+          (mousedown)="onMouseDown($event)"
+          (mouseup)="onMouseUp(row)"
+          (click)="openDialog('change', row)"
+          class="columnCenter"
+        >
+          {{ value }}
+        </div>
+      </ng-template>
+    </ngx-datatable-column>
+    <!-- 住址列结束 -->
+  </ngx-datatable>
+</div>
+<!-- 表格结束 -->
