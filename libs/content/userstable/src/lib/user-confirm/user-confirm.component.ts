@@ -1,6 +1,5 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { UserDataService } from '@training-app/backend';
 import { ContentUserstableFacade } from '../+state/content-userstable.facade';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
 import { addUser } from '@training-app/content/userstable';
