@@ -1,15 +1,11 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormControl, Validators } from '@angular/forms';
 import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
-<<<<<<< HEAD
-import { ConflictingNumberValidator, Gender } from '@training-app/backend';
-=======
 import {
+  UserDataService,
   ConflictingNumberValidator,
   Gender,
-  UserDataService,
 } from '@training-app/backend';
->>>>>>> add ngrx
 import { ContentUserstableFacade } from '../+state/content-userstable.facade';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
 import { UserConfirmComponent } from '../user-confirm/user-confirm.component';
@@ -24,10 +20,7 @@ export class UserDialogComponent implements OnInit {
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public data: { action: string; row: ContentUserstableEntity },
-<<<<<<< HEAD
-=======
     private userService: UserDataService,
->>>>>>> add ngrx
     private facade: ContentUserstableFacade
   ) {}
 
@@ -42,13 +35,8 @@ export class UserDialogComponent implements OnInit {
   //姓名输入控件
   //必须输入项
   nameControl = new FormControl('', [Validators.required]);
-<<<<<<< HEAD
   //地址输入控件
   addressControl = new FormControl('');
-=======
-  //姓名输入控件
-  liveControl = new FormControl('');
->>>>>>> add ngrx
   //选择的性别
   genderSelected: string = '';
   //对话框标题
@@ -93,11 +81,7 @@ export class UserDialogComponent implements OnInit {
       Name: this.nameControl.value,
       Gender:
         +this.genderSelected === Gender.Male ? Gender.Male : Gender.FeMale,
-<<<<<<< HEAD
       Address: this.addressControl.value,
-=======
-      Address: this.liveControl.value,
->>>>>>> add ngrx
     };
 
     this.dialog.open(UserConfirmComponent, {

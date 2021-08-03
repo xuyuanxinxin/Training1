@@ -1,13 +1,4 @@
-<<<<<<< HEAD
 import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
-=======
-import {
-  EntityState,
-  EntityAdapter,
-  createEntityAdapter,
-  Dictionary,
-} from '@ngrx/entity';
->>>>>>> add ngrx
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ContentUserstableActions from './content-userstable.actions';
