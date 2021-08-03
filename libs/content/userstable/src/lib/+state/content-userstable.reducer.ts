@@ -1,9 +1,4 @@
-import {
-  EntityState,
-  EntityAdapter,
-  createEntityAdapter,
-  Dictionary,
-} from '@ngrx/entity';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { createReducer, on, Action } from '@ngrx/store';
 
 import * as ContentUserstableActions from './content-userstable.actions';
@@ -57,6 +52,10 @@ const contentUserstableReducer = createReducer(
       selectedId: user.Number,
     })
   ),
+  on(ContentUserstableActions.addUserFailure, (state, { error }) => ({
+    ...state,
+    error,
+  })),
   on(ContentUserstableActions.updateUserSuccess, (state, { user }) =>
     contentUserstableAdapter.upsertOne(user, {
       ...state,

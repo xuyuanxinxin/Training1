@@ -20,7 +20,6 @@ export class UserDialogComponent implements OnInit {
     public dialog: MatDialog,
     @Inject(MAT_DIALOG_DATA)
     public data: { action: string; row: ContentUserstableEntity },
-    private userService: UserDataService,
     private facade: ContentUserstableFacade
   ) {}
 

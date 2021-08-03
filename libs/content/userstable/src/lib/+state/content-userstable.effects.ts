@@ -43,13 +43,21 @@ export class ContentUserstableEffects {
   addUser$ = createEffect(() =>
     this.dataPresistence.fetch(ContentUserstableActions.addUser, {
       run: (action: any) => {
-        return this.dataService
-          .addUser(action.user)
-          .pipe(
-            map((data) =>
-              ContentUserstableActions.addUserSuccess({ user: data })
+        return this.dataService.addUser(action.user).pipe(
+          map((data) =>
+            ContentUserstableActions.addUserSuccess({ user: data })
+          ),
+          catchError((err) =>
+            of(
+              ContentUserstableActions.addUserFailure({
+                error: (err as HttpErrorResponse).message,
+              })
             )
-          );
+          )
+        );
+      },
+      onError: (action, error) => {
+        return ContentUserstableActions.addUserFailure({ error: error });
       },
     })
   );

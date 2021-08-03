@@ -27,6 +27,11 @@ export const addUserSuccess = createAction(
   props<{ user: ContentUserstableEntity }>()
 );
 
+export const addUserFailure = createAction(
+  '[trainingApp/add] Add User Failure',
+  props<{ error: any }>()
+);
+
 export const updateUser = createAction(
   '[trainingApp/update] Update User',
   props<{ id: number; user: ContentUserstableEntity }>()
@@ -37,6 +42,11 @@ export const updateUserSuccess = createAction(
   props<{ user: ContentUserstableEntity }>()
 );
 
+export const updateUserFailure = createAction(
+  '[trainingApp/update] Update User Failure',
+  props<{ error: any }>()
+);
+
 export const deleteUser = createAction(
   '[trainingApp/delete] Delete User',
   props<{ id: number }>()
@@ -44,4 +54,8 @@ export const deleteUser = createAction(
 export const deleteUserSuccess = createAction(
   '[trainingApp/delete] Delete User Success',
   props<{ user: ContentUserstableEntity }>()
+);
+export const deleteUserFailure = createAction(
+  '[trainingApp/delete] Delete User Failure',
+  props<{ error: any }>()
 );
