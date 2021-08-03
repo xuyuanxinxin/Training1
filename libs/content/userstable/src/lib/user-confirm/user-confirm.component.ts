@@ -3,7 +3,7 @@ import { MatDialog, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserDataService } from '@training-app/backend';
 import { ContentUserstableFacade } from '../+state/content-userstable.facade';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
-import { addUser, addUserSuccess } from '@training-app/content/userstable';
+import { addUser } from '@training-app/content/userstable';
 import { deleteUser, updateUser } from '../+state/content-userstable.actions';
 
 @Component({
@@ -20,7 +20,6 @@ export class UserConfirmComponent implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA)
     public data: { user: ContentUserstableEntity; action: any },
-    private userService: UserDataService,
     private dialog: MatDialog,
     private facade: ContentUserstableFacade
   ) {}

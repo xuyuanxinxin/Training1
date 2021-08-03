@@ -31,8 +31,6 @@ export function ConflictingNumberValidator(
     }
     //符合条件列表为空则没有报错
     //否则则有错误信息返回
-    // if (userArrayLength === 0) {
-
     if (userArrayLength === 0) {
       return null;
     } else {

@@ -31,7 +31,6 @@ export class FormComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private userService: UserDataService,
     private facade: ContentUserstableFacade
   ) {}
 

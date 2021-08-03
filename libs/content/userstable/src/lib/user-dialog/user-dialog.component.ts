@@ -34,8 +34,8 @@ export class UserDialogComponent implements OnInit {
   //姓名输入控件
   //必须输入项
   nameControl = new FormControl('', [Validators.required]);
-  //姓名输入控件
-  liveControl = new FormControl('');
+  //地址输入控件
+  addressControl = new FormControl('');
   //选择的性别
   genderSelected: string = '';
   //对话框标题
@@ -50,7 +50,7 @@ export class UserDialogComponent implements OnInit {
       this.numberControl.setValue(this.data.row.Number);
       this.nameControl.setValue(this.data.row.Name);
       this.genderSelected = this.data.row.Gender.toString();
-      this.liveControl.setValue(this.data.row.Address);
+      this.addressControl.setValue(this.data.row.Address);
     }
   }
 
@@ -80,7 +80,7 @@ export class UserDialogComponent implements OnInit {
       Name: this.nameControl.value,
       Gender:
         +this.genderSelected === Gender.Male ? Gender.Male : Gender.FeMale,
-      Address: this.liveControl.value,
+      Address: this.addressControl.value,
     };
 
     this.dialog.open(UserConfirmComponent, {
