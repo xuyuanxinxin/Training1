@@ -2,11 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ColumnMode } from '@swimlane/ngx-datatable';
 import { Observable } from 'rxjs';
-<<<<<<< HEAD
 import { Gender } from '@training-app/backend';
-=======
-import { UserDataService, Gender } from '@training-app/backend';
->>>>>>> add ngrx
 import { UserDialogComponent } from '../user-dialog/user-dialog.component';
 import { UserConfirmComponent } from '../user-confirm/user-confirm.component';
 import { ContentUserstableEntity } from '../+state/content-userstable.models';
